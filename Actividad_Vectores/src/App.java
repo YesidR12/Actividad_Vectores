@@ -86,5 +86,149 @@ public class App {
         }
     }
 
-    
+    public static void llenarVector(Scanner scanner, int[] vector) {
+        System.out.println();
+        System.out.println("===============================================");
+        System.out.println("          INGRESO DE VALORES DEL VECTOR");
+        System.out.println("===============================================");
+
+        for (int i = 0; i < vector.length; i++) {
+            int valor;
+            do {
+                System.out.print("Ingrese el valor " + (i + 1) + " (entre " + MIN_VALOR + " y " + MAX_VALOR + "): ");
+                valor = scanner.nextInt();
+
+                if (valor < MIN_VALOR || valor > MAX_VALOR) {
+                    System.out.println("El numero esta fuera del rango permitido. Intente nuevamente.");
+                }
+            } while (valor < MIN_VALOR || valor > MAX_VALOR);
+
+            vector[i] = valor;
+        }
+
+        System.out.println();
+        System.out.println("El vector ha sido completado.");
+        mostrarVector(vector);
+    }
+
+    public static void buscarValor(Scanner scanner, int[] vector) {
+        System.out.println();
+        System.out.println("===============================================");
+        System.out.println("             BUSQUEDA DE VALOR");
+        System.out.println("===============================================");
+        System.out.print("Ingrese el numero a buscar: ");
+        int valorBuscado = scanner.nextInt();
+        boolean encontrado = false;
+
+        for (int i = 0; i < vector.length; i++) {
+            if (vector[i] == valorBuscado) {
+                System.out.println();
+                System.out.println("El numero " + valorBuscado + " se encuentra en la posicion " + i + ".");
+                encontrado = true;
+                break;
+            }
+        }
+
+        if (!encontrado) {
+            System.out.println();
+            System.out.println("El numero " + valorBuscado + " no se encuentra en el vector.");
+        }
+    }
+
+    public static void mostrarMayorYMenor(int[] vector) {
+        int mayor = vector[0];
+        int menor = vector[0];
+
+        for (int i = 1; i < vector.length; i++) {
+            if (vector[i] > mayor) {
+                mayor = vector[i];
+            }
+            if (vector[i] < menor) {
+                menor = vector[i];
+            }
+        }
+
+        System.out.println();
+        System.out.println("El numero mayor es: " + mayor);
+        System.out.println("El numero menor es: " + menor);
+    }
+
+    public static void mostrarMultiplos(Scanner scanner, int[] vector) {
+        System.out.println();
+        System.out.println("===============================================");
+        System.out.println("           MULTIPLOS DE X EN EL VECTOR");
+        System.out.println("===============================================");
+        System.out.print("Ingrese el valor de X para buscar multiplos: ");
+        int x = scanner.nextInt();
+        boolean existenMultiplos = false;
+
+        System.out.println();
+        System.out.println("Los multiplos de " + x + " en el vector son:");
+
+        for (int i = 0; i < vector.length; i++) {
+            if (vector[i] % x == 0) {
+                System.out.print(vector[i] + " ");
+                existenMultiplos = true;
+            }
+        }
+
+        if (!existenMultiplos) {
+            System.out.println();
+            System.out.println("No hay multiplos de " + x + " en el vector.");
+        } else {
+            System.out.println();
+        }
+    }
+
+    public static int sumarVector(int[] vector) {
+        int suma = 0;
+
+        for (int i = 0; i < vector.length; i++) {
+            suma += vector[i];
+        }
+
+        return suma;
+    }
+
+    public static void mostrarPromedioYSuperiores(int[] vector) {
+        double suma = sumarVector(vector);
+        double promedio = suma / vector.length;
+
+        System.out.println();
+        System.out.println("El promedio del vector es: " + promedio);
+
+        ArrayList<Integer> mayoresAlPromedio = new ArrayList<>();
+
+        for (int valor : vector) {
+            if (valor > promedio) {
+                mayoresAlPromedio.add(valor);
+            }
+        }
+
+        if (mayoresAlPromedio.isEmpty()) {
+            System.out.println();
+            System.out.println("No hay numeros mayores que el promedio.");
+        } else {
+            System.out.println();
+            System.out.println("Los numeros mayores que el promedio son:");
+            for (int valor : mayoresAlPromedio) {
+                System.out.print(valor + " ");
+            }
+            System.out.println();
+            System.out.println();
+            System.out.println("Cantidad de numeros por encima del promedio: " + mayoresAlPromedio.size());
+        }
+    }
+
+    public static void mostrarVector(int[] vector) {
+        System.out.println();
+        System.out.println("===============================================");
+        System.out.println("                 VECTOR ACTUAL");
+        System.out.println("===============================================");
+        for (int i = 0; i < vector.length; i++) {
+            System.out.print(vector[i] + " ");
+        }
+        System.out.println();
+        System.out.println();
+    }
 }
